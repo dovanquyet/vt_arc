@@ -8,3 +8,4 @@ alias sjobs="sacct --format JobID,JobName%33,User,Account,Partition,AllocCPUS,St
 
 alias act="conda activate"
 alias deact="conda deactivate"
+alias checkother="ps -fU pinjie"

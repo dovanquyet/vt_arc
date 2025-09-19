@@ -86,6 +86,7 @@ echo "Environment setup complete. You are now in your GPU-enabled interactive se
 ### Step 4: Run a script and monitor GPU usages
 # Finetuning with `unsloth`
 # pip install unsloth
+python 
 
 # GPU
 watch nvidia-smi \
