@@ -1,12 +1,12 @@
 # VT ARC Quickstart Guide
 
-## Useful Links
+## 🔗 Useful Links
 
 - [ARC Documentation: Getting Started](https://docs.arc.vt.edu/)
 - [Coldfront Allocations: Find your allocations](https://coldfront.arc.vt.edu/)
 - [ARC Example `sbatch` Jobs](https://github.com/AdvancedResearchComputing/examples)
 
-## Notes
+## 📝 Notes
 
 - ARC clusters use `slurm` as the job scheduler.
 - ARC clusters have shared storage across all clusters, thus in many cases you can setup environment/codebase once and use on any cluster.\
@@ -14,9 +14,9 @@
 
 ---
 
-## I. Login to ARC
+## 🔐 I. Login to ARC
 
-NOTE: You shouldn't run any job on login nodes. Login nodes are for code editing, job submission, and file transfer only.
+⚠️ NOTE: You shouldn't run any job on login nodes. Login nodes are for code editing, job submission, and file transfer only.
 To run your code, you need to [request an interactive job or submit a batch job](https://github.com/dovanquyet/vt_arc?tab=readme-ov-file#ii-request-a-gpu-interactive-job).
 
 Set your environment variables (edit as needed):
@@ -54,7 +54,7 @@ cat ~/.ssh/arc_key.pub
 ssh -i ~/.ssh/arc_key $VT_PID@$LOGIN_HOSTNAME.arc.vt.edu
 ```
 
-### Setup SFTP
+### 🔁 Setup SFTP
 
 You can use `scp` or `rsync` to transfer files to/from ARC, or setup SFTP in your favorite IDE (e.g., VSCode, PyCharm, etc.) using the same ssh private key.
 
@@ -80,7 +80,7 @@ A sample `sftp.json` file for this extension is:
 
 ---
 
-## II. Request a GPU Interactive Job
+## 🖥️ II. Request a GPU Interactive Job
 
 While it's recommended to use `sbatch` for batch jobs, you can/should request an interactive job for testing and debugging.
 
@@ -153,7 +153,7 @@ ssh <above_hostname>
 
 ---
 
-## 3. Environment Setup (Anaconda/Miniforge)
+## ⚙️ III. Environment Setup (Anaconda/Miniforge)
 
 Load Miniforge3:
 
@@ -192,7 +192,7 @@ pip install transformers
 
 ---
 
-## 4. Run Scripts & Monitor GPU Usage
+## ▶️ IV. Run Scripts & Monitor GPU Usage
 
 Run your Python script (example):
 
@@ -209,7 +209,7 @@ watch nvidia-smi --query-gpu=timestamp,name,memory.total,memory.free,memory.used
 
 ---
 
-## 5. File Transfer
+## 🔁 V. File Transfer
 
 Transfer files to/from ARC using `scp` or `rsync`:
 
@@ -221,9 +221,11 @@ scp myfile.txt $VT_PID@$LOGIN_HOSTNAME.arc.vt.edu:/path/on/arc/
 scp $VT_PID@$LOGIN_HOSTNAME.arc.vt.edu:/path/on/arc/myfile.txt ./
 ```
 
+In a more convenient way, you can use SFTP in your favorite IDE (e.g., VSCode, PyCharm, etc.) as described in the SSH with Private Key section above.
+
 ---
 
-## 6. Non-Interactive (Batch) Jobs
+## 📦 VI. Non-Interactive (Batch) Jobs
 
 See [ARC documentation](https://docs.arc.vt.edu/) for batch job submission examples.
 
@@ -244,8 +246,10 @@ scancel <job_id>
 
 ---
 
-## Troubleshooting
+## 🛠️ Troubleshooting
 
 - If login fails, ensure Duo Push is ready and try again.
 - For persistent sessions, use `tmux` or `screen`.
 - For more help, see the [ARC documentation](https://docs.arc.vt.edu/).
+
+
