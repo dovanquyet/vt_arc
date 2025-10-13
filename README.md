@@ -16,6 +16,9 @@
 
 ## I. Login to ARC
 
+NOTE: You shouldn't run any job on login nodes. Login nodes are for code editing, job submission, and file transfer only.
+To run your code, you need to [request an interactive job or submit a batch job](https://github.com/dovanquyet/vt_arc?tab=readme-ov-file#ii-request-a-gpu-interactive-job).
+
 Set your environment variables (edit as needed):
 
 ```bash
@@ -244,6 +247,5 @@ scancel <job_id>
 ## Troubleshooting
 
 - If login fails, ensure Duo Push is ready and try again.
-- For persistent sessions, use `tmux`.
+- For persistent sessions, use `tmux` or `screen`.
 - For more help, see the [ARC documentation](https://docs.arc.vt.edu/).
-
