@@ -130,6 +130,7 @@ Request an interactive session:
 ```bash
 interact -A $ALLOCATION_ID \
   --partition $PARTITION \
+  --qos $QOS \
   --cpus-per-task $NUM_CPUS_PER_TASK \
   --time=${NUM_HOURS}:00:00 \
   --gres=gpu:$NUM_GPUS \
@@ -233,12 +234,13 @@ When your code runs well in an interactive session, it's recommended to submit a
 
 ```bash
 # To submit a job
-sbatch /path/to/your_job_script.sh
+sbatch /path/to/your_job_script.sh # sbatch scripts/sft.sh
 
 # To check our job status.
 # If you don't see it, it means your job is canceled due to error or it's done.
 # You will see the job_id of your job in the first column.
-squeue 
+squeue
+sacct
 
 # To cancel a job
 scancel <job_id>
@@ -251,5 +253,3 @@ scancel <job_id>
 - If login fails, ensure Duo Push is ready and try again.
 - For persistent sessions, use `tmux` or `screen`.
 - For more help, see the [ARC documentation](https://docs.arc.vt.edu/).
-
-
