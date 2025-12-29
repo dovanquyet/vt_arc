@@ -233,6 +233,9 @@ See [ARC documentation](https://docs.arc.vt.edu/) for batch job submission examp
 When your code runs well in an interactive session, it's recommended to submit a non-interactive job using `sbatch` to optimize resource usage. 
 
 ```bash
+# Check available nodes and partitions
+sinfo
+
 # To submit a job
 sbatch /path/to/your_job_script.sh # sbatch scripts/sft.sh
 
@@ -240,6 +243,8 @@ sbatch /path/to/your_job_script.sh # sbatch scripts/sft.sh
 # If you don't see it, it means your job is canceled due to error or it's done.
 # You will see the job_id of your job in the first column.
 squeue
+
+# Use sacct to see completed jobs and resource usage
 sacct
 
 # To cancel a job
