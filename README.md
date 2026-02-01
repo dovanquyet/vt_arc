@@ -9,8 +9,8 @@
 ## 📝 Notes
 
 - ARC clusters use `slurm` as the job scheduler.
-- ARC clusters have shared storage across all clusters, thus in many cases you can setup environment/codebase once and use on any cluster.\
-`project/<allocation_id>` is persistent and large storage, suitable for large models and datasets. Storage under `/home` is also persistent but smaller, while `/scratch` is short-term (last for 90 days). You can install software in your home directory. More about storage [here](https://www.docs.arc.vt.edu/resources/storage.html).
+- ARC clusters have **shared storage across all clusters**, thus in many cases you can setup environment/codebase once and use on any cluster.\
+`project/<allocation_id>` is persistent and large storage, suitable for large models and datasets. `/home` is also persistent but smaller, while `/scratch` is short-term (last for 90 days). You can install software in your home directory. More about storage [here](https://www.docs.arc.vt.edu/resources/storage.html).
 
 ---
 
@@ -48,6 +48,9 @@ cat ~/.ssh/arc_key.pub
 ```
 
 2. Copy the output of `cat ~/.ssh/arc_key.pub`, then paste on the file `~/.ssh/authorized_keys` on a ARC cluster.
+
+> NOTE: In case you need heavy editing, you can do it in your IDE, then delete the `~/.ssh/authorized_keys` file on ARC cluster and re-create the edited file. [Remember to change the permission of the file](https://chatgpt.com/share/696df56a-1bc8-8002-b137-bd3d5bc4c7f0) after re-creating the file: `chmod 600 ~/.ssh/authorized_keys`.
+
 
 3. Login to ARC cluster using private key:
 ```bash
@@ -146,10 +149,11 @@ echo $(hostname)
 echo "Remaining time: $(squeue -h -j $SLURM_JOBID -o %L)"
 ```
 
-To connect to the job from another terminal:
+To connect to (and disconnect from) the job from another terminal:
 
 ```bash
 ssh <above_hostname>
+logout # to disconnect. FYI, it will NOT terminate the job.
 ```
 
 ---
@@ -166,7 +170,7 @@ module load Miniforge3
 # module load PyTorch/2.1.2-foss-2023a-CUDA-12.1.1
 ```
 
-Create and activate a conda environment (recommended to do this on the target node type):
+Create and activate a conda environment (recommended to do this on the target node):
 
 ```bash
 export ENV_NAME=unsloth
