@@ -47,7 +47,7 @@ ssh-keygen -f ~/.ssh/arc_key
 cat ~/.ssh/arc_key.pub
 ```
 
-2. Copy the output of `cat ~/.ssh/arc_key.pub`, then paste on the file `~/.ssh/authorized_keys` on a ARC cluster.
+2. Copy the output of `cat ~/.ssh/arc_key.pub` on your local machine, then paste on a new line of the file `~/.ssh/authorized_keys` on a ARC cluster.
 
 > NOTE: In case you need heavy editing, you can do it in your IDE, then delete the `~/.ssh/authorized_keys` file on ARC cluster and re-create the edited file. [Remember to change the permission of the file](https://chatgpt.com/share/696df56a-1bc8-8002-b137-bd3d5bc4c7f0) after re-creating the file: `chmod 600 ~/.ssh/authorized_keys`.
 
@@ -160,6 +160,8 @@ logout # to disconnect. FYI, it will NOT terminate the job.
 
 ## ⚙️ III. Environment Setup (Anaconda/Miniforge)
 
+> Possible issues and solutions with conda env here: [python_package_installation.md](./python_package_installation.md)
+
 Load Miniforge3:
 
 ```bash
@@ -216,7 +218,9 @@ watch nvidia-smi --query-gpu=timestamp,name,memory.total,memory.free,memory.used
 
 ## 🔁 V. File Transfer
 
-Transfer files to/from ARC using `scp` or `rsync`:
+If you have set up SSH with private key, you can use a SFTP plugin of your IDE (e.g., VSCode, PyCharm, etc.) as described in the SSH with Private Key section above.
+
+Otherwise, you can transfer files to/from ARC using `scp` or `rsync`:
 
 ```bash
 # Example: Copy file to ARC
@@ -226,7 +230,6 @@ scp myfile.txt $VT_PID@$LOGIN_HOSTNAME.arc.vt.edu:/path/on/arc/
 scp $VT_PID@$LOGIN_HOSTNAME.arc.vt.edu:/path/on/arc/myfile.txt ./
 ```
 
-In a more convenient way, you can use SFTP in your favorite IDE (e.g., VSCode, PyCharm, etc.) as described in the SSH with Private Key section above.
 
 ---
 
