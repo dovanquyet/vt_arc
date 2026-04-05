@@ -5,6 +5,7 @@
 - [ARC Documentation: Getting Started](https://docs.arc.vt.edu/)
 - [Coldfront Allocations: Find your allocations](https://coldfront.arc.vt.edu/)
 - [ARC Example `sbatch` Jobs](https://github.com/AdvancedResearchComputing/examples)
+- [Code-only simplified version of this README](./setup.sh)
 
 ## 📝 Notes
 
@@ -16,8 +17,9 @@
 
 ## 🔐 I. Login to ARC
 
-⚠️ NOTE: You shouldn't run any job on login nodes. Login nodes are for code editing, job submission, and file transfer only.
-To run your code, you need to [request an interactive job or submit a batch job](https://github.com/dovanquyet/vt_arc?tab=readme-ov-file#ii-request-a-gpu-interactive-job).
+> [!NOTE]
+> You shouldn't run any job on login nodes. Login nodes are for code editing, job submission, and file transfer only.
+> To run your code, you need to [request an interactive job or submit a batch job](https://github.com/dovanquyet/vt_arc?tab=readme-ov-file#ii-request-a-gpu-interactive-job).
 
 Set your environment variables (edit as needed):
 
@@ -49,7 +51,8 @@ cat ~/.ssh/arc_key.pub
 
 2. Copy the output of `cat ~/.ssh/arc_key.pub` on your local machine, then paste on a new line of the file `~/.ssh/authorized_keys` on a ARC cluster.
 
-> NOTE: In case you need heavy editing, you can do it in your IDE, then delete the `~/.ssh/authorized_keys` file on ARC cluster and re-create the edited file. [Remember to change the permission of the file](https://chatgpt.com/share/696df56a-1bc8-8002-b137-bd3d5bc4c7f0) after re-creating the file: `chmod 600 ~/.ssh/authorized_keys`.
+> [!TIP]
+> In case you need heavy editing of this file, you can do it in your IDE, then delete the `~/.ssh/authorized_keys` file on ARC cluster and re-create the edited file. [Remember to change the permission of the file](https://chatgpt.com/share/696df56a-1bc8-8002-b137-bd3d5bc4c7f0) after re-creating the file: `chmod 600 ~/.ssh/authorized_keys`.
 
 
 3. Login to ARC cluster using private key:
@@ -195,7 +198,7 @@ pip install transformers
 # pip install unsloth
 ```
 
-**Tip:** Use ARC project storage for large models and datasets.
+**Tip:** Use ARC project storage for large models and datasets. Set your Huggingface `HF_HOME` and related environment variables to `project/<allocation_id>` to store models and datasets there.
 
 ---
 
@@ -256,6 +259,9 @@ sacct
 
 # To cancel a job
 scancel <job_id>
+
+# Show job resource usage
+showjobusage
 ```
 
 ---
