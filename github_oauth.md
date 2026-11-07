@@ -17,3 +17,12 @@ $ git clone https://github.com/USERNAME/REPO.git
 Username: YOUR-USERNAME
 Password: YOUR-PERSONAL-ACCESS-TOKEN
 ```
+
+## Updated on 2026 Oct.
+
+We can install github cli without sudo privileges by downloading the binary and adding it to the PATH. Here are the steps:
+* Choose a suitable release from the [GitHub CLI releases page](https://github.com/cli/cli/releases)
+* Download the binary for your operating system (e.g., `[gh_2.30.0_linux_amd64.tar.gz](https://github.com/cli/cli/releases/download/v2.103.3/gh_2.103.3_macOS_amd64.zip)` for MacOS with Intel chips)
+* Extract the binary and move it to a directory in your PATH (e.g., `~/bin` or `/usr/local/bin`)
+* Verify the installation by running `gh --version` in your terminal
+* Then you can authenticate with GitHub using `gh auth login` and follow the prompts to authenticate with your GitHub account.

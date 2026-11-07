@@ -4,7 +4,7 @@
 
 - [ARC Documentation: Getting Started](https://docs.arc.vt.edu/)
 - [Coldfront Allocations: Find your allocations](https://coldfront.arc.vt.edu/)
-- [ARC Example `sbatch` Jobs](https://github.com/AdvancedResearchComputing/examples)
+- [ARC Example `sbatch` Jobs](https://github.com/AdvancedResearchComputing/examples/blob/master/Amber/run_falcon_gpu.sh)
 - [Code-only simplified version of this README](./setup.sh)
 
 ## 📝 Notes
@@ -19,7 +19,7 @@
 
 > [!NOTE]
 > You shouldn't run any job on login nodes. Login nodes are for code editing, job submission, and file transfer only.
-> To run your code, you need to [request an interactive job or submit a batch job](https://github.com/dovanquyet/vt_arc?tab=readme-ov-file#ii-request-a-gpu-interactive-job).
+> To run your code, you need to [request an interactive job or submit a batch job](https://github.com/dovanquyet/vt_arc#%EF%B8%8F-ii-request-a-gpu-interactive-job).
 
 Set your environment variables (edit as needed):
 
@@ -111,17 +111,19 @@ tmux a -t node
 Set allocation and resource variables:
 
 ```bash
-export ALLOCATION_ID=personal # (see https://coldfront.arc.vt.edu/, `slurm_account_name`)
-export NUM_GPUS=2
-export NUM_HOURS=5
-export NUM_CPUS_PER_TASK=16
+export ALLOCATION_ID=<your_allocation_id> # (see https://coldfront.arc.vt.edu/, `slurm_account_name`. 
+                                          # Unfortunately, the free-trial allocation `personal` is no longer available)
+export NUM_GPUS=1
+export NUM_HOURS=2
+export NUM_CPUS_PER_TASK=8
 
+# See available partitions and QOS here: https://docs.arc.vt.edu/resources/compute/02falcon.html#quality-of-service-qos
 if [[ "$LOGIN_HOSTNAME" == "tinkercliffs1" ]]; then
   export PARTITION=a100_normal_q
   export QOS=tc_a100_normal_short
 elif [[ "$LOGIN_HOSTNAME" == "falcon1" ]]; then
-  export PARTITION=l40s_normal_q
-  export QOS=fal_l40s_normal_short
+  export PARTITION=v100_normal_short
+  export QOS=fal_v100_normal_short
 fi
 ```
 
@@ -194,11 +196,11 @@ echo "Conda environment ${ENV_NAME} activated."
 Install packages as needed (example):
 
 ```bash
-pip install transformers
-# pip install unsloth
+# pip install transformers
+pip install unsloth
 ```
 
-**Tip:** Use ARC project storage for large models and datasets. Set your Huggingface `HF_HOME` and related environment variables to `project/<allocation_id>` to store models and datasets there.
+**Tip:** Use ARC project storage for large models and datasets. Point your Huggingface `HF_HOME` to `/projects/<allocation_id>/huggingface` to store models and datasets there.
 
 ---
 
@@ -238,7 +240,7 @@ scp $VT_PID@$LOGIN_HOSTNAME.arc.vt.edu:/path/on/arc/myfile.txt ./
 
 ## 📦 VI. Non-Interactive (Batch) Jobs
 
-See [ARC documentation](https://docs.arc.vt.edu/) for batch job submission examples.
+See [ARC documentation](https://docs.arc.vt.edu/), [ARC example scripts](https://github.com/AdvancedResearchComputing/examples/blob/master/Amber/run_falcon_gpu.sh), or [this script](./scripts/sft.sh) in this repo for batch job submission examples.
 
 When your code runs well in an interactive session, it's recommended to submit a non-interactive job using `sbatch` to optimize resource usage. 
 
@@ -247,7 +249,8 @@ When your code runs well in an interactive session, it's recommended to submit a
 sinfo
 
 # To submit a job
-sbatch /path/to/your_job_script.sh # sbatch scripts/sft.sh
+# sbatch /path/to/your_job_script.sh
+sbatch scripts/sft.sh
 
 # To check our job status.
 # If you don't see it, it means your job is canceled due to error or it's done.

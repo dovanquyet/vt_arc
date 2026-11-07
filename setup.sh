@@ -18,10 +18,10 @@ tmux a -t node
 ### Step 2: Request an interact job for testing and debugging
 # Modify PARTITION and NUM_GPUS for your desired configuration.
 # The --verbose flag provides more output.
-export ALLOCATION_ID=llms-if # or `personal`. Find in https://coldfront.arc.vt.edu/.
-export NUM_GPUS=2
-export NUM_HOURS=5
-export NUM_CPUS_PER_TASK=16
+export ALLOCATION_ID=<your_allocation_id> # Find in https://coldfront.arc.vt.edu/. Unfortunately, the `personal` allocation is no longer available.
+export NUM_GPUS=1
+export NUM_HOURS=2
+export NUM_CPUS_PER_TASK=8
 
 if [[ "$CLUSTER" == "tinkercliffs1" ]]; then
   export PARTITION=a100_normal_q # l40s_normal_q
